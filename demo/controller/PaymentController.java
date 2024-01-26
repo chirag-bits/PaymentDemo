@@ -44,6 +44,19 @@ public class PaymentController {
 		// add created order in DB
 		return order;
 	}
+	// fetch all order
+	// orders are recorded in razorpay portals, thats why we are creating a new table for this
+	// orders details we will fetch from razor pay portal itself
+
+	@GetMapping("/orders")
+	public List<Order> getAllOrders()throws Exception {
+		System.out.println("INSIDE CONTROLLER");
+		RazorpayClient razorpayClient = new RazorpayClient("rzp_test_qM7alK4G9E8u4G", "towDW6o3GIyk6zjoLMwkFpid");
+		JSONObject options = new JSONObject();
+		options.put("count","1");
+		List<Order> orders = razorpayClient.Orders.fetchAll(options);
+		return orders;
+	}
 
 }
 
